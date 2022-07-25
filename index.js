@@ -57,13 +57,18 @@ app.get("/api/persons/:id", (request, response) => {
     .catch((err) => console.log(err));
 });
 app.delete("/api/persons/:id", (request, response) => {
-  Person.findByIdAndRemove(request.params.id);
-  response.status(204).end();
+  Person.findByIdAndRemove(request.params.id).then(() => {
+    response.status(204).end();
+  });
 });
-app.put("api/persons/:id", (request, response) => {
-  Person.findByIdAndUpdate(request.params.id, request.body.data).then(
-    (person) => response.json(person)
-  );
+app.put("/api/persons/:id", (request, response) => {
+  const person = {
+    name: request.body.name,
+    number: request.body.number,
+  };
+  Person.findByIdAndUpdate(request.params.id, person)
+    .then((person) => response.json(person))
+    .catch((err) => console.log(err));
 });
 app.post("/api/persons", (request, response) => {
   //   const maxId = persons.length > 0 ? Math.max(...persons.map((n) => n.id)) : 0;

@@ -1,3 +1,10 @@
+PUT http://localhost:3000/api/persons/62de593bd954d63f0f700f81
+Content-Type: application/json
 
-GET http://localhost:3000/api/persons/
+{
+    "name" :"Hiep",
+    "number": "123"
+}
+###
+GET http://localhost:3000/api/persons
 
