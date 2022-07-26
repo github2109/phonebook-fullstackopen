@@ -11,6 +11,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {
+    "eslint": "^8.20.0",
     "nodemon": "^2.0.19"
   },
   "scripts": {

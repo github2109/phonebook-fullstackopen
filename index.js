@@ -1,4 +1,3 @@
-const { request, response } = require("express");
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -37,14 +36,14 @@ app.get("/api/persons/:id", (request, response, next) => {
     })
     .catch((error) => next(error));
 });
-app.delete("/api/persons/:id", (request, response) => {
+app.delete("/api/persons/:id", (request, response, next) => {
   Person.findByIdAndRemove(request.params.id)
     .then(() => {
       response.status(204).end();
     })
     .catch((error) => next(error));
 });
-app.put("/api/persons/:id", (request, response,next) => {
+app.put("/api/persons/:id", (request, response, next) => {
   const person = {
     name: request.body.name,
     number: request.body.number,
@@ -52,7 +51,7 @@ app.put("/api/persons/:id", (request, response,next) => {
   Person.findByIdAndUpdate(request.params.id, person, {
     new: true,
     runValidators: true,
-    context: 'query',
+    context: "query",
   })
     .then((person) => response.json(person))
     .catch((err) => next(err));
